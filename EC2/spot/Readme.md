@@ -105,3 +105,8 @@ interruption-handler , https://github.com/awslabs/ec2-spot-labs/interruption-han
 - Then Create a glue-crawler to get the schema of the data and then you can query from table using athena.
 - The query can be : ''' select instanceid from database.table where itemdescription like "%sRHEL%" or itemdescription like "%SUSE%" '''
 - After getting price, you need to involve the cost of savings-plan if any
+
+## Further discussion 
+- How to use spot in ecs,eks,batch?
+- Terraform/cloudformation scripts for using spot instances
+- how to implete intteruption handling in ecs,eks(draining container)?
