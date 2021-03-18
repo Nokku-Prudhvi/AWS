@@ -110,3 +110,4 @@ interruption-handler , https://github.com/awslabs/ec2-spot-labs/interruption-han
 - How to use spot in ecs,eks,batch,emr?
 - Terraform/cloudformation scripts for using spot instances
 - how to implete intteruption handling in ecs,eks(draining container)?
+- Using packer in jenkins(CI/CD use case) for building ami and docker-images.
