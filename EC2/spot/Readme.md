@@ -92,6 +92,15 @@ interruption-handler , https://github.com/awslabs/ec2-spot-labs/interruption-han
 - for implementing you need to create a parameter i n parameter-store anbd as you know there is not cost of using standard parameter.
 - for detaching from load balancer use the script from https://github.com/awslabs/ec2-spot-labs/tree/master/workshops/ec2-spot-fleet-web-app , check read.me file .
 
+### Spot block:
+- if you have workload to be defined for 1-6 hours you can use this option in spot-fleet-request.This also can provide saving from 30-40 percent compare to on-demand.
+- But the integration with autoscaling group and load-balancer with spot-block is not present.  
 
 ## Cost saving calculation:
-
+- using spot-ondemand-pricing.py script, you can get the spot(max of last 3-months data) ,on-demand pricing.
+- If you want to convert your existing service to spot instances and compare the cost you need to follow the below process.
+- You need to give instance-id,instance-type,os(like linux,windows,suse,rhel) to above script to calculate cost. But getting "os" info is not possible to using describe_instances() or aws-config advance query. SO for getting os info for instances for anyother purpose , you can use below process
+- download billing data from s3 location which you might be already configured in cost-explorer to generate report.
+- The file name is detailed_billing_line_items_with_resources_and_tags.csv.zip. since athena dont suppport .zip files, either convert this .zip file to bzip or gzip2 or csv file.
+- Then Create a glue-crawler to get the schema of the data and then you can query from table using athena.
+- After getting price, you need to involve the cost of savings-plan if any
