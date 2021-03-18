@@ -73,7 +73,7 @@ cant scale-up/down the number of instances. so to scale-up and down the spot ins
 
 - Its better that you can attach a load balancer to asg , so that you can get a chance to share the load across multiple instances and also has leverage to keep instances in private subnets.
 - In load balancer make sure your cross-zone load balancing and draining is enabled.
-- If you are using make sure you have tag of the target-group-arn to the instance via spot-fleet-request and also set draining of load-balancer set to 120 seconds to make use of interrption-handling event which we can discuss
+- If you are using make sure you have tag of the target-group-arn to the instance via spot-fleet-request and also set deregistration-delay(draining of load-balancer set to 120 seconds) to make use of interrption-handling event which we can discuss
 in the next slide.As we know this draining option allows existiing,inflight requests made to the instance and wont send new-requests to the loadbalancer.
 - you can add scaling-policies based on cpu-utilization to keep the instances scale-up and down when neccessary.
 - you can verify the spot-instance by instance parameter "Lifecycle". Its value is "spot" for spot instances and "normal" for other type of instances.
