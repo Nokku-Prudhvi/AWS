@@ -103,4 +103,5 @@ interruption-handler , https://github.com/awslabs/ec2-spot-labs/interruption-han
 - download billing data from s3 location which you might be already configured in cost-explorer to generate report.
 - The file name is detailed_billing_line_items_with_resources_and_tags.csv.zip. since athena dont suppport .zip files, either convert this .zip file to bzip or gzip2 or csv file.
 - Then Create a glue-crawler to get the schema of the data and then you can query from table using athena.
+- The query can be : ''' select instanceid from database.table where itemdescription like "%sRHEL%" or itemdescription like "%SUSE%" '''
 - After getting price, you need to involve the cost of savings-plan if any
