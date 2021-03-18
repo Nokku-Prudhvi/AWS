@@ -73,6 +73,7 @@ cant scale-up/down the number of instances. so to scale-up and down the spot ins
 
 - Its better that you can attach a load balancer to asg , so that you can get a chance to share the load across multiple instances and also has leverage to keep instances in private subnets.
 - In load balancer make sure your cross-zone load balancing and draining is enabled.
+- If you are using make sure you have tag for the target-group-arn to the instance 
 - you can add scaling-policies based on cpu-utilization to keep the instances scale-up and down when neccessary.
 - you can verify the spot-instance by instance parameter "Lifecycle". Its value is "spot" for spot instances and "normal" for other type of instances.
 
