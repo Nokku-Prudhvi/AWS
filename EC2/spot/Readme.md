@@ -79,3 +79,12 @@ cant scale-up/down the number of instances. so to scale-up and down the spot ins
 ### source:
 - https://www.youtube.com/watch?v=9psCsCcbfFM&t=3s&ab_channel=AWSOnlineTechTalks
 - https://github.com/awslabs/ec2-spot-labs/tree/master/workshops/ec2-spot-fleet-web-app
+
+
+## Interruption Handling
+- when an instance is interrupted there are two events in EC2-space through which you can trigger lambda using cloudwatch event rule.
+- In the cloudwatch event-rule , you need to select ec2-service and select these two events :"rebalace recommendation"(which generally comes before) , and "interrution handling"
+- In the lambda you can use for detaching instances and draining ecs-containers(which we can discuss in a new demo).
+- You can also use this lambda to trigger SSM-run-command and run the backup or neccessary commands.For implementing this you can make use of code in github ec2-spot-labs,
+interruption-handler , https://github.com/awslabs/ec2-spot-labs/interruption-handler.
+- you can 
