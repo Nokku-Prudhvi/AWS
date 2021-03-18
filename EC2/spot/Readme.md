@@ -107,6 +107,6 @@ interruption-handler , https://github.com/awslabs/ec2-spot-labs/interruption-han
 - After getting price, you need to involve the cost of savings-plan if any
 
 ## Further discussion 
-- How to use spot in ecs,eks,batch?
+- How to use spot in ecs,eks,batch,emr?
 - Terraform/cloudformation scripts for using spot instances
 - how to implete intteruption handling in ecs,eks(draining container)?
