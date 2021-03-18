@@ -77,5 +77,5 @@ cant scale-up/down the number of instances. so to scale-up and down the spot ins
 - you can verify the spot-instance by instance parameter "Lifecycle". Its value is "spot" for spot instances and "normal" for other type of instances.
 
 ### source:
-https://www.youtube.com/watch?v=9psCsCcbfFM&t=3s&ab_channel=AWSOnlineTechTalks
-https://github.com/awslabs/ec2-spot-labs/tree/master/workshops/ec2-spot-fleet-web-app
+- https://www.youtube.com/watch?v=9psCsCcbfFM&t=3s&ab_channel=AWSOnlineTechTalks
+- https://github.com/awslabs/ec2-spot-labs/tree/master/workshops/ec2-spot-fleet-web-app
