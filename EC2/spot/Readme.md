@@ -73,7 +73,8 @@ cant scale-up/down the number of instances. so to scale-up and down the spot ins
 
 - Its better that you can attach a load balancer to asg , so that you can get a chance to share the load across multiple instances and also has leverage to keep instances in private subnets.
 - In load balancer make sure your cross-zone load balancing and draining is enabled.
-- If you are using make sure you have tag for the target-group-arn to the instance 
+- If you are using make sure you have tag for the target-group-arn to the instance and draining set to 120 seconds to make use of interrption-handling event which we can discuss
+in the next slide.As we know this draining option allows existiing,inflight requests made to the instance and wont send new-requests to the loadbalancer.
 - you can add scaling-policies based on cpu-utilization to keep the instances scale-up and down when neccessary.
 - you can verify the spot-instance by instance parameter "Lifecycle". Its value is "spot" for spot instances and "normal" for other type of instances.
 
@@ -89,3 +90,8 @@ cant scale-up/down the number of instances. so to scale-up and down the spot ins
 - You can also use this lambda to trigger SSM-run-command and run the backup or neccessary commands.For implementing this you can make use of code in github ec2-spot-labs,
 interruption-handler , https://github.com/awslabs/ec2-spot-labs/interruption-handler.
 - for implementing you need to create a parameter i n parameter-store anbd as you know there is not cost of using standard parameter.
+- for detaching from load balancer use the script from https://github.com/awslabs/ec2-spot-labs/tree/master/workshops/ec2-spot-fleet-web-app , check read.me file .
+
+
+## Cost saving calculation:
+
