@@ -38,7 +38,7 @@
 
       
 - you can configure AWS Credentials or leave set to none to use AWS EC2 Instance Role, but make sure that role/user have iam-permission-polies as follows:AmazonEC2SpotFleetTaggingRole,AmazonEC2ReadOnlyAccess.Optional permissions : ModifySpotFleetRequest,TerminateInstances, UpdateAutoScalingGroup , refer https://plugins.jenkins.io/ec2-fleet/
-- You can attach SSM-role optionally to run-commands when instance got interruption . This case is well explained later.
+- You can attach SSM-permissions optionally to run-commands when instance got interruption . This case is well explained later.
 - you need to add new cloud by going to "Manage Jenkins" and "Configure-system"/"configure clouds".
 - In the new-cloud add the ssh-keypair details and add a label to it(default it is ec2-fleet). This label is useful in running jenkins-jobs in spot-instances
 - Check Maintain target capacity ((Default) If you configure the request type as maintain, EC2 Fleet places an asynchronous request for your desired capacity, and maintains capacity by automatically replenishing any interrupted Spot Instances.)
