@@ -1,9 +1,6 @@
 import boto3
 from botocore.exceptions import ClientError
-import logging, os
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
 
 # API Clients
 ec2client = boto3.client('ec2')
@@ -25,7 +22,9 @@ def get_interruption_handling_properties(instance_id):
     interruption_handling_properties = {
         'controller-type': '',
         'controller-id': '',
-        'managed': False }
+        'managed': False,
+        'loadBalancerTargetGroup':''
+        }
     
     # Check if instance belongs to an ASG or to a Spot Fleet
     for tag in instance_tags:
@@ -39,7 +38,9 @@ def get_interruption_handling_properties(instance_id):
             interruption_handling_properties['controller-id'] = tag['Value']
         elif tag['Key'] == 'SpotInterruptionHandler/enabled':
             interruption_handling_properties['managed'] = tag['Value'].lower() == 'true'
-
+        if tag['Key'] == 'loadBalancerTargetGroup':
+            loadBalancerTargetGroup = tag['Value']
+    
     return interruption_handling_properties
 
 def detach_instance_from_asg(instance_id,as_group_name):
@@ -55,6 +56,19 @@ def detach_instance_from_asg(instance_id,as_group_name):
             id=instance_id,asg_name=as_group_name)
         logger.error( error_message + e.response['Error']['Message'])
         raise e
+
+        
+def detach_from_alb(target_group_arn,instanceId):
+  try:
+    elbv2client = boto3.client('elbv2')
+    deregisterTargets = elbv2client.deregister_targets(TargetGroupArn=target_group_arn ,Targets=[{'Id':instanceId}])
+  except:
+    print("No action being taken. Unable to deregister targets for instance id:", instanceId)
+    return
+  print("Detaching instance from target:")
+  print(instanceId, target_group_arn, deregisterTargets, sep=",")
+  return
+
 
 def controller_has_defined_interruption_commands(asg_name):
     # Check if an SSM parameter store with interruption commandshas been set up 
@@ -111,6 +125,9 @@ def handler(event, context):
     
     interruption_handling_properties = get_interruption_handling_properties(instance_id)
     
+    #if instance attached to load balancer you can detach
+    detach_from_alb(interruption_handling_properties['loadBalancerTargetGroup'],instance_id)
+    
     #if the instance is tagged as managed and belongs to an Auto Scaling group or a Spot Fleet
     if interruption_handling_properties['managed']:
         if interruption_handling_properties['controller-id'] != '':
@@ -141,3 +158,6 @@ def handler(event, context):
         id=instance_id,controller=interruption_handling_properties['controller-id'])
     logger.info(info_message)
     return(info_message)
+
+
+
