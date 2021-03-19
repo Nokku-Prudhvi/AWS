@@ -111,3 +111,4 @@ interruption-handler , https://github.com/awslabs/ec2-spot-labs/interruption-han
 - Terraform/cloudformation scripts for using spot instances
 - how to implete intteruption handling in ecs,eks(draining container)?
 - Using packer in jenkins(CI/CD use case) for building ami and docker-images.
+- using old-ami in autoscaling group instead og userdata script
