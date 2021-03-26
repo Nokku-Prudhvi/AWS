@@ -1,5 +1,4 @@
-docker-id : nokkuprudhvi
-password: 
+
 
 sudo yum install docker
  sudo systemctl start docker
